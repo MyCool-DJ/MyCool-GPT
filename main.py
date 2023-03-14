@@ -8,13 +8,12 @@ full_path = data_path / filename
 with open(full_path, "r") as f:
     lines = f.readlines()
 
-# regex pattern for matching timestamps
-pattern = re.compile(r"^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:\s\d+)?$")
+pattern = re.compile(r"^[A-Z][a-z]{2}\s\d{1,2},\s\d{4}\s\d{1,2}:\d{2}:\d{2}[ap]m$")  # update pattern to match new format
 
-# filter out lines that start with the timestamp
+# filter out lines that contain timestamps
 new_lines = [line for line in lines if not pattern.match(line)]
 
-with open("main.py", "w") as f:
+with open(full_path, "w") as f:
     f.writelines(new_lines)
 
-
+print("Done")
